@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top 250 Movie Chart</title>
+</head>
+<body>
+
+{% for video in videos %}
+        {{ video.video_rank }}. <a href="{{ video.movie_url }}" title="{{ video.hover_text }}">{{ video.title }}</a><br>
+        <img src="{{ video.image_url }}">
+        {{ video.rating }} on {{ video.no_of_votes }} votes.<br>
+    <br><br>
+{% endfor %}
+
+{% if videos %}
+<div class="pagination">
+    <span class="step-links">
+        {% if videos.has_previous %}
+            <a href="?page={{ videos.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ videos.number }} of {{ videos.paginator.num_pages }}.
+        </span>
+
+        {% if videos.has_next %}
+            <a href="?page={{ videos.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+</body>
+</html>
